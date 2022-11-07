@@ -1,8 +1,4 @@
 import {
-  CustomError,
-  IErrorResponse
-} from './shared/globals/helpers/errorHandler';
-import {
   Application,
   json,
   urlencoded,
@@ -22,8 +18,10 @@ import { createClient } from 'redis';
 import { createAdapter } from '@socket.io/redis-adapter';
 import Logger from 'bunyan';
 import 'express-async-errors';
-import { config } from './config';
-import applicationRoutes from './routes';
+import {config} from '@root/config';
+import applicationRoutes from '@root/routes';
+
+import { CustomError, IErrorResponse } from 'global/helpers/errorHandler';
 
 const SERVER_PORT = process.env.PORT || 5000;
 const log: Logger = config.createLogger('Server');
@@ -145,5 +143,7 @@ export class ChattyServer {
     });
   }
 
-  // private soceketIOConnection(io: Server): void {}
+  private soceketIOConnection(io: Server): void {
+    log.info(`SocketIO connection established ${io}`);
+  }
 }
