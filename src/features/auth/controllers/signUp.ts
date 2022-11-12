@@ -1,3 +1,4 @@
+import  HTTP_STATUS  from 'http-status-codes';
 import { UploadApiErrorResponse, UploadApiResponse } from 'cloudinary';
 import { ISignUpData } from './../interfaces/auth.interface';
 import { IAuthDocument } from '@auth/interfaces/auth.interface';
@@ -37,6 +38,15 @@ export class SignUp {
     if (!result?.public_id) {
       throw new BadRequestError('Error uploading image');
     }
+
+    res.status(HTTP_STATUS.CREATED).json({
+      status: 'success',
+      message: 'User created successfully',
+      data: {
+        authData,
+        result,
+      },
+    });
   }
   private signUpData(data: ISignUpData): IAuthDocument{
     const {_id, uId, username, password, email, avatarColor} = data;
