@@ -21,7 +21,7 @@ import 'express-async-errors';
 import {config} from '@root/config';
 import applicationRoutes from '@root/routes';
 
-import { CustomError, IErrorResponse } from 'global/helpers/errorHandler';
+import { CustomError, IErrorResponse } from '@global/helpers/errorHandler';
 
 const SERVER_PORT = process.env.PORT || 5000;
 const log: Logger = config.createLogger('Server');
